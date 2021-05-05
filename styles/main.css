@@ -1,0 +1,185 @@
+.controls {
+    margin: 10px;
+}
+
+#ForgeDiv {
+    border-radius:10px;
+    margin-top: 10px;
+    height: 81vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+}
+
+#progressBarValue {
+    display: inline-block;
+}
+
+.progress {
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    /*line-height: 24px;  */
+}
+
+.tree-bucket-image {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+}
+
+.form-control {
+    margin-top: 10px;
+}
+
+.context-menu {
+    width: 150px;
+   
+    visibility: hidden;
+    background: whitesmoke;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+}
+
+.context-menu button {
+    width: 125px;
+    height: 35px;
+    margin-top: 10px;
+}
+
+.tree-file-image {
+    height: 24px;
+    width: 24px;
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border: none;
+    border-radius: 12px;
+    line-height: 24px;
+    vertical-align: top;
+}
+
+#progressBarBackground {
+    vertical-align: middle;
+    height: 30px;
+    display: inline-block;
+    position: static;
+    transition: 1s;
+    background-image: linear-gradient(green, rgb(78, 221, 78), green);
+}
+
+.buckets {
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px 4px #999;
+    margin-left: 10px
+}
+
+.project-tree-header {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    color: white;
+    background-color: #274B59;
+}
+
+.project-tree {
+    overflow-y: scroll;
+    max-height: 78vh;
+    margin-left: 10px;
+}
+
+.btn-primary {
+    background-color: #274B59;
+    border: 0px solid transparent;
+    margin: 5px;
+}
+
+.treeFile {
+    margin-top: 5px;
+    margin-left: 40px;
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 24px;
+    width: 90%;
+    border: 0px solid transparent;
+    color: black;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: break-word;
+    border-radius: 13px;
+    transition:0.5s;
+}
+
+.treeFile:hover {
+    border-radius: 13px;
+    box-shadow: 2px 2px 8px 2px #888;
+}
+
+.treeBucket {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.treeBucket:hover {
+    cursor: pointer;
+    color: dodgerblue;
+}
+
+.row {
+    width: 100%;
+}
+
+.header {
+    height: 60px;
+    background: #274B59;
+    color: white;
+    font-size: 20px;
+    padding-left: 5%;
+    line-height: 60px;
+}
+
+/*------ScrollBar--------*/
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #fff, #e4e4e4);
+    border: 1px solid #aaa;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, #1E98BA);
+}
+
+.downloadFile{
+   
+    height: 100%;
+}

@@ -1,0 +1,129 @@
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/ForgeDataManagement/styles/main.css">
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/6.*/style.min.css"
+        type="text/css">
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/6.*/viewer3D.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+</head>
+
+<body onmousedown="closeContextMenu(event)">
+
+    <div class="header">
+        <img src="/ForgeDataManagement/images/Building360_64.png" alt="" style="margin-right:20px">
+        Forge Data Management
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="controls">
+                <div class="d-flex flex-row justify-content-between">
+                    <button id="btnGetBuckets" class="btn btn-primary p-2 flex-fill">Get All Files</button>
+
+                    <button id="btnCreateBucket" class="btn btn-primary p-2 flex-fill" data-toggle="modal"
+                        data-target="#bucketModal">Create Bucket</button>
+
+                    <button id="btnXML" class="btn btn-primary p-2 flex-fill">Get XML</button>
+                </div>
+
+                <div id="progress" class="progress">
+                    <div class="col-md-1"> Syncing</div>
+                    <div class="col-md-10">
+                        <div id="progressBarBackground"></div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="progressBarValue"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="buckets">
+                <div class="project-tree-header">Buckets</div>
+                <div id="tree" class="project-tree"></div>
+            </div>
+
+        </div>
+        <div class="col-md-8" style="max-height: 85vh">
+            <div class="row">
+                <div class="col-md-11">
+                    <div><input id="fileName" type="text" class="form-control" aria-describedby="emailHelp"
+                            placeholder="File Name"></div>
+                    <div><input id="fileUrn" type="text" class="form-control" aria-describedby="emailHelp"
+                            placeholder="URN"></div>
+                </div>
+                <div class="col-md-1" style="padding: 10px 0 0 0">
+                    <button class="btn btn-success downloadFile" id="downloadRevitFile">Download</button>
+                </div>
+
+            </div>
+            <div id="ForgeDiv"></div>
+        </div>
+
+    </div>
+
+    <!-- Modal Bucket Dialog -->
+    <div class="modal fade" id="bucketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create bucket for files</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="server/CreateBucket.php" method="post">
+                        <div class="modal-body">
+
+                            <label for="bucket-name" class="col-form-label">Bucket Name:</label>
+                            <input type="text" name="bucketName" class="form-control" id="bucket-name">
+                            <input id="bucketToken" type="hidden" name="token">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="context-menu" class="context-menu">
+        <label for="submitFile" class="btn btn-success" style="width:100%">Upload file</label>
+
+        <button id="btnDeleteBucket" class="btn btn-danger" style="width:100%">Delete Bucket</button>
+
+        <button id="btnDeleteFile" class="btn btn-danger" style="width:100%; display: none;">Delete File</button>
+
+        <form action="#" style="display: none" method="POST" enctype='multipart/form-data'>
+            <input type="file" name="files[]" id="submitFile" multiple="multiple" style="visibility: hidden;">
+            <input type="text" id="bucketKey" name="bucketKey" style="visibility: hidden;">
+            <input type="text" id="inputToken" name="inputToken" style="visibility: hidden;">
+            <input type="submit" value="" style="visibility: hidden;">
+        </form>
+    </div>
+    <a href="xml/modelUrn.xml" style="visibility: hidden" id="btnDownload" download="modelUrn.xml">Download</a>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/ForgeDataManagement/js/forge.js"></script>
+<script src="/ForgeDataManagement/js/data_management.js"></script>
+
+
+</html>
